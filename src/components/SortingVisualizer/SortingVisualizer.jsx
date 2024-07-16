@@ -106,12 +106,12 @@ function SortingVisualizer() {
           <div className='absolute top-0 right-0 mt-2'>
             <SocialButton
               icon={Github}
-              href='https://github.com/yourusername'
+              href='https://github.com/itsadi-24'
               label='GitHub Profile'
             />
             <SocialButton
               icon={Linkedin}
-              href='https://www.linkedin.com/in/your-linkedin-profile'
+              href='https://www.linkedin.com/in/adi-prasan-khuntia-3944072a5/'
               label='LinkedIn Profile'
             />
           </div>

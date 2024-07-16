@@ -2,7 +2,7 @@ const Footer = () => {
   return (
     <div className='w-full mt-6 text-center -translate-y-3'>
       <a
-        href='https://www.linkedin.com/in/your-linkedin-profile'
+        href='https://www.adiprasan.me/'
         target='_blank'
         rel='noopener noreferrer'
         className='inline-block text-2xl font-medium text-gray-300 transition-all duration-300 hover:scale-105 hover:text-white group'
