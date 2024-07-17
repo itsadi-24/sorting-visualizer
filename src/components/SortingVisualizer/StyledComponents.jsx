@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Info } from 'lucide-react';
 
 export const StyledButton = ({ onClick, children, disabled = false }) => (
   <div className='relative group'>
@@ -64,4 +64,14 @@ export const StyledSlider = ({ value, onChange, min, max }) => (
       <span>Fast</span>
     </div>
   </div>
+);
+
+export const InfoButton = ({ onClick }) => (
+  <button
+    onClick={onClick}
+    className='inline-flex items-center justify-center w-10 h-10 ml-2 text-white transition-all duration-300 bg-gray-800 rounded-full hover:bg-gray-700 hover:scale-110'
+    aria-label='Algorithm Information'
+  >
+    <Info size={20} />
+  </button>
 );

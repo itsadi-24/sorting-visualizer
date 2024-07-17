@@ -1,5 +1,10 @@
 import { useEffect, useState, useRef } from 'react';
-import { StyledButton, StyledSelect, StyledSlider } from './StyledComponents';
+import {
+  InfoButton,
+  StyledButton,
+  StyledSelect,
+  StyledSlider,
+} from './StyledComponents';
 import {
   bubbleSort,
   selectionSort,
@@ -20,6 +25,7 @@ import {
   sizeOptions,
 } from '../../utils/constants';
 import { Github, Linkedin } from 'lucide-react';
+import InfoOverlay from './InfoOverlay';
 
 function SortingVisualizer() {
   const [bar, setBar] = useState([80, 40, 20, 70, 30]);
@@ -29,6 +35,7 @@ function SortingVisualizer() {
   const [sortID, setSortID] = useState(3);
   const [isSorting, setIsSorting] = useState(false);
   const stopSortingRef = useRef(false);
+  const [isInfoOpen, setIsInfoOpen] = useState(false);
 
   useEffect(() => {
     generateNewArray();
@@ -108,7 +115,7 @@ function SortingVisualizer() {
     <div className='min-h-screen p-8 pb-0 text-white bg-gradient-to-br from-gray-900 via-purple-900 to-indigo-900'>
       <div className='mx-auto max-w-7xl'>
         <div className='relative mb-6'>
-          <div className='absolute top-0 right-0 mt-2'>
+          <div className='absolute top-0 right-0 flex items-center mt-2'>
             <SocialButton
               icon={Github}
               href='https://github.com/itsadi-24'
@@ -119,6 +126,7 @@ function SortingVisualizer() {
               href='https://www.linkedin.com/in/adi-prasan-khuntia-3944072a5/'
               label='LinkedIn Profile'
             />
+            <InfoButton onClick={() => setIsInfoOpen(true)} />
           </div>
           <h1
             className='text-5xl font-bold text-center'
@@ -200,6 +208,7 @@ function SortingVisualizer() {
         </div>
         <Footer />
       </div>
+      <InfoOverlay isOpen={isInfoOpen} onClose={() => setIsInfoOpen(false)} />
     </div>
   );
 }
