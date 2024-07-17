@@ -23,7 +23,9 @@ import { Github, Linkedin } from 'lucide-react';
 
 function SortingVisualizer() {
   const [bar, setBar] = useState([80, 40, 20, 70, 30]);
+  // const [speed, setSpeed] = useState(SPEED);
   const [speed, setSpeed] = useState(SPEED);
+  const speedRef = useRef(SPEED);
   const [sortID, setSortID] = useState(3);
   const [isSorting, setIsSorting] = useState(false);
   const stopSortingRef = useRef(false);
@@ -31,6 +33,9 @@ function SortingVisualizer() {
   useEffect(() => {
     generateNewArray();
   }, []);
+  useEffect(() => {
+    speedRef.current = speed;
+  }, [speed]);
 
   const swap = (i, j, newBars) => {
     document.getElementById('bar-' + i).style.height = newBars[j] + 'px';
@@ -48,10 +53,10 @@ function SortingVisualizer() {
     var newBars = [...bar];
     switch (sortID) {
       case 1:
-        await selectionSort(newBars, swap, stopSortingRef, speed);
+        await selectionSort(newBars, swap, stopSortingRef, speedRef);
         break;
       case 2:
-        await insertionSort(newBars, swap, stopSortingRef, speed);
+        await insertionSort(newBars, swap, stopSortingRef, speedRef);
         break;
       case 3:
         await quickSort(
@@ -60,7 +65,7 @@ function SortingVisualizer() {
           newBars,
           swap,
           stopSortingRef,
-          speed
+          speedRef
         );
         break;
       case 4:
@@ -70,11 +75,11 @@ function SortingVisualizer() {
           newBars,
           swap,
           stopSortingRef,
-          speed
+          speedRef
         );
         break;
       default:
-        await bubbleSort(newBars, swap, stopSortingRef, speed);
+        await bubbleSort(newBars, swap, stopSortingRef, speedRef);
         break;
     }
 

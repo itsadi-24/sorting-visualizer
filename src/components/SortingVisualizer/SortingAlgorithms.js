@@ -5,22 +5,22 @@ import {
   ORGINAL_COLOR,
 } from '../../utils/constants';
 
-async function waitForAnimate(sp) {
-  sp = sp < 5 ? 5 : sp;
+async function waitForAnimate(speedRef) {
+  const sp = speedRef.current < 5 ? 5 : speedRef.current;
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve('');
-    }, sp);
+    }, 1000 - sp); // Invert the speed so that higher values mean faster
   });
 }
 
-export async function bubbleSort(newBars, swap, stopSortingRef, speed) {
+export async function bubbleSort(newBars, swap, stopSortingRef, speedRef) {
   for (var i = 0; i < newBars.length; i++) {
     for (var j = 0; j < newBars.length - 1 - i; j++) {
       if (stopSortingRef.current) return;
       document.getElementById('bar-' + j).style.background = COMP_COLOR;
       document.getElementById('bar-' + (j + 1)).style.background = COMP_COLOR;
-      await waitForAnimate(speed);
+      await waitForAnimate(speedRef);
       document.getElementById('bar-' + j).style.background = ORGINAL_COLOR;
       document.getElementById('bar-' + (j + 1)).style.background =
         ORGINAL_COLOR;
@@ -34,7 +34,7 @@ export async function bubbleSort(newBars, swap, stopSortingRef, speed) {
   }
 }
 
-export async function selectionSort(newBars, swap, stopSortingRef, speed) {
+export async function selectionSort(newBars, swap, stopSortingRef, speedRef) {
   for (var i = 0; i < newBars.length; i++) {
     if (stopSortingRef.current) return;
     var leastIdx = i;
@@ -43,7 +43,7 @@ export async function selectionSort(newBars, swap, stopSortingRef, speed) {
     for (var j = i + 1; j < newBars.length; j++) {
       if (stopSortingRef.current) return;
       document.getElementById('bar-' + j).style.background = COMP_COLOR;
-      await waitForAnimate(speed);
+      await waitForAnimate(speedRef);
       document.getElementById('bar-' + j).style.background = ORGINAL_COLOR;
 
       if (newBars[j] < newBars[leastIdx]) {
@@ -59,7 +59,7 @@ export async function selectionSort(newBars, swap, stopSortingRef, speed) {
   }
 }
 
-export async function insertionSort(newBars, swap, stopSortingRef, speed) {
+export async function insertionSort(newBars, swap, stopSortingRef, speedRef) {
   for (var i = 1; i < newBars.length; i++) {
     if (stopSortingRef.current) return;
     var tmp = newBars[i],
@@ -71,7 +71,7 @@ export async function insertionSort(newBars, swap, stopSortingRef, speed) {
       document.getElementById('bar-' + j).style.background = COMP_COLOR;
       document.getElementById('bar-' + (j + 1)).style.background = PIVOT_COLOR;
 
-      await waitForAnimate(speed);
+      await waitForAnimate(speedRef);
       newBars[j + 1] = newBars[j];
       document.getElementById('bar-' + (j + 1)).style.height =
         newBars[j] + 'px';
@@ -85,7 +85,7 @@ export async function insertionSort(newBars, swap, stopSortingRef, speed) {
   }
 }
 
-async function partition(low, high, array, swap, stopSortingRef, speed) {
+async function partition(low, high, array, swap, stopSortingRef, speedRef) {
   if (stopSortingRef.current) return;
   let pivot = high,
     i = low;
@@ -95,7 +95,7 @@ async function partition(low, high, array, swap, stopSortingRef, speed) {
     if (stopSortingRef.current) return;
     document.getElementById('bar-' + j).style.background = COMP_COLOR;
     document.getElementById('bar-' + i).style.background = COMP_COLOR;
-    await waitForAnimate(speed);
+    await waitForAnimate(speedRef);
     document.getElementById('bar-' + j).style.background = ORGINAL_COLOR;
     document.getElementById('bar-' + i).style.background = ORGINAL_COLOR;
 
@@ -109,20 +109,34 @@ async function partition(low, high, array, swap, stopSortingRef, speed) {
   return i;
 }
 
-export async function quickSort(low, high, array, swap, stopSortingRef, speed) {
+export async function quickSort(
+  low,
+  high,
+  array,
+  swap,
+  stopSortingRef,
+  speedRef
+) {
   if (stopSortingRef.current) return;
   if (low >= high) return;
-  let pi = await partition(low, high, array, swap, stopSortingRef, speed);
-  await quickSort(low, pi - 1, array, swap, stopSortingRef, speed);
-  await quickSort(pi + 1, high, array, swap, stopSortingRef, speed);
+  let pi = await partition(low, high, array, swap, stopSortingRef, speedRef);
+  await quickSort(low, pi - 1, array, swap, stopSortingRef, speedRef);
+  await quickSort(pi + 1, high, array, swap, stopSortingRef, speedRef);
 }
 
-export async function mergeSort(low, high, array, swap, stopSortingRef, speed) {
+export async function mergeSort(
+  low,
+  high,
+  array,
+  swap,
+  stopSortingRef,
+  speedRef
+) {
   if (stopSortingRef.current) return;
   if (low >= high) return;
   var mid = Math.floor((low + high) / 2);
-  await mergeSort(low, mid, array, swap, stopSortingRef, speed);
-  await mergeSort(mid + 1, high, array, swap, stopSortingRef, speed);
+  await mergeSort(low, mid, array, swap, stopSortingRef, speedRef);
+  await mergeSort(mid + 1, high, array, swap, stopSortingRef, speedRef);
 
   var newArr1 = [],
     newArr2 = [];
@@ -141,7 +155,7 @@ export async function mergeSort(low, high, array, swap, stopSortingRef, speed) {
       COMP_COLOR;
     document.getElementById('bar-' + newArr2[j].idx).style.background =
       COMP_COLOR;
-    await waitForAnimate(speed);
+    await waitForAnimate(speedRef);
     document.getElementById('bar-' + newArr1[i].idx).style.background =
       SORTED_COLOR;
     document.getElementById('bar-' + newArr2[j].idx).style.background =
