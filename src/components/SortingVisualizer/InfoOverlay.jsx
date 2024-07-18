@@ -57,7 +57,7 @@ const InfoOverlay = ({ isOpen, onClose }) => {
           <X size={24} />
         </button>
         <h2 className='mb-4 text-2xl font-bold text-white'>
-          Sorting Algorithms Information
+          Sorting Algorithms Information 📝
         </h2>
         <div className='space-y-6'>
           {Object.values(algorithmInfo).map((algo) => (
