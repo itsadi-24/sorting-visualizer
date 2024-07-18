@@ -158,6 +158,7 @@ function SortingVisualizer() {
                     generateNewArray();
                   }}
                   options={sortOptions}
+                  disabled={isSorting}
                 />
               </div>
               <div className='flex items-center gap-3'>
@@ -170,6 +171,7 @@ function SortingVisualizer() {
                   }}
                   min={1}
                   max={1000}
+                  disabled={isSorting}
                 />
               </div>
               <div className='flex items-center gap-3'>
@@ -185,6 +187,7 @@ function SortingVisualizer() {
                     );
                   }}
                   options={sizeOptions}
+                  disabled={isSorting}
                 />
               </div>
             </div>

@@ -25,12 +25,20 @@ export const StyledButton = ({ onClick, children, disabled = false }) => (
   </div>
 );
 
-export const StyledSelect = ({ value, onChange, options }) => (
+export const StyledSelect = ({
+  value,
+  onChange,
+  options,
+  disabled = false,
+}) => (
   <div className='relative'>
     <select
       value={value}
       onChange={onChange}
-      className='py-2 pl-3 pr-10 text-white bg-gray-700 border border-gray-600 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent'
+      disabled={disabled}
+      className={`py-2 pl-3 pr-10 text-white bg-gray-700 border border-gray-600 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent ${
+        disabled ? 'opacity-50 cursor-not-allowed' : ''
+      }`}
     >
       {options.map((option) => (
         <option key={option.value} value={option.value}>
@@ -38,7 +46,11 @@ export const StyledSelect = ({ value, onChange, options }) => (
         </option>
       ))}
     </select>
-    <div className='absolute inset-y-0 right-0 flex items-center px-2 text-white pointer-events-none'>
+    <div
+      className={`absolute inset-y-0 right-0 flex items-center px-2 text-white pointer-events-none ${
+        disabled ? 'opacity-50' : ''
+      }`}
+    >
       <ChevronDown size={18} />
     </div>
   </div>
