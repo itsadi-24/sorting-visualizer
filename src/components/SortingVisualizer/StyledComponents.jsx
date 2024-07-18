@@ -13,7 +13,7 @@ export const StyledButton = ({ onClick, children, disabled = false }) => (
         <button
           onClick={onClick}
           disabled={disabled}
-          className={`w-full h-full px-4 py-2 text-sm font-semibold bg-black rounded-lg input opacity-90 ${
+          className={`w-full h-full px-4 py-2 text-sm font-semibold font-sans text-white bg-black rounded-lg input opacity-90 ${
             disabled ? 'opacity-50' : ''
           }`}
         >
