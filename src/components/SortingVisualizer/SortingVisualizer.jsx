@@ -17,7 +17,6 @@ import Footer from './Footer';
 import HeaderUnderline from './HeaderUnderline';
 import SocialButton from './SocialButton';
 import {
-  BARS,
   SPEED,
   barWidth,
   ORGINAL_COLOR,
@@ -28,7 +27,8 @@ import { Github, Linkedin } from 'lucide-react';
 import InfoOverlay from './InfoOverlay';
 
 function SortingVisualizer() {
-  const [bar, setBar] = useState([80, 40, 20, 70, 30]);
+  // const [bar, setBar] = useState([80, 40, 20, 70, 30]);
+  const [bar, setBar] = useState([]);
   // const [speed, setSpeed] = useState(SPEED);
   const [speed, setSpeed] = useState(SPEED);
   const speedRef = useRef(SPEED);
@@ -101,14 +101,14 @@ function SortingVisualizer() {
   };
 
   const generateNewArray = () => {
-    var arr = Array.from({ length: BARS }, () =>
+    const newBar = Array.from({ length: bar.length || 100 }, () =>
       Math.floor(Math.random() * 440)
     );
-    for (let i = 0; i < bar.length; i++) {
-      var dom = document.getElementById('bar-' + i);
+    for (let i = 0; i < newBar.length; i++) {
+      const dom = document.getElementById('bar-' + i);
       if (dom) dom.style.backgroundColor = ORGINAL_COLOR;
     }
-    setBar(arr);
+    setBar(newBar);
   };
 
   return (
