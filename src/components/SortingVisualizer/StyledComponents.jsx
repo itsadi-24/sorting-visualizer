@@ -4,7 +4,7 @@ import { ChevronDown, Info } from 'lucide-react';
 export const StyledButton = ({ onClick, children, disabled = false }) => (
   <div className='relative group'>
     <div
-      className={`relative z-10 w-48 h-10 overflow-hidden bg-black rounded-lg opacity-90 ${
+      className={`relative z-10 w-40 h-10 overflow-hidden bg-black rounded-lg opacity-90 ${
         disabled ? 'cursor-not-allowed' : ''
       }`}
     >
