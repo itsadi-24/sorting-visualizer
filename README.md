@@ -18,7 +18,7 @@ A beautifully animated sorting visualization app built with **React**, **Tailwin
 
 ## 🎥 Demo
 
-Check out a live demo of the Sorting Visualizer [Link](https://sorting-visualizer-adi.vercel.app/) (add your live link).
+Check out a live demo of the Sorting Visualizer [Link](https://sorting-visualizer-adi.vercel.app/)
 
 ## 💻 Tech Stack
 
